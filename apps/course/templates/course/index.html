@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+    th{
+        width: 300px;
+    }
+    td{
+        width: 300px;
+    }
+    table{
+        border: 1px solid black;
+    }
+    
+    
+    
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class = "container">
+        <h2>Add a new course</h2>
+        <div class="addnew">
+            <form action="/new" method="post">
+                {% csrf_token %}
+                Name:<br>
+                <input type="text" name="course_name"><br><br>
+                Description:<br>
+                <textarea name="description"></textarea>
+                <input type="submit" value="Add">
+            </form>
+        </div>
+
+        <div class="table">
+            <h2>Courses</h2>
+
+            <table>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Description</th>
+                    <th>Date Added</th>
+                    <th>Actions</th>
+                </tr>
+
+            {% for i in course %}
+                <tr>
+                    <td>{{ i.course_name }}</td>
+                    <td>{{ i.description }}</td>
+                    <td style="text-align: center">{{ i.created_at }}</td>
+                    <td style="text-align: center"> <a href="/delete/{{ i.id }}">remove</a></td>
+                </tr>
+            {% endfor %}
+
+            </table>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+    
+</body>
+</html>
